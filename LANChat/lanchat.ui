@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LANChatClass</class>
+ <widget class="QMainWindow" name="LANChatClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>748</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>及时雨</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="lanchat.qrc">
+    <normaloff>:/LANChat/image/MSN-Messenger.png</normaloff>:/LANChat/image/MSN-Messenger.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
+      <item>
+       <widget class="QLabel" name="labelName">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>2</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QFontComboBox" name="fontComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>1</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="fontsizecomboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="currentText">
+           <string>9</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>11</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>12</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>13</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>14</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>15</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>16</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>17</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>18</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>19</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>20</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>21</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>22</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="textbold">
+          <property name="toolTip">
+           <string>加粗</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/textbold.png</normaloff>:/LANChat/image/textbold.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="textitalic">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/textitalic.png</normaloff>:/LANChat/image/textitalic.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="textUnderline">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/textunder.png</normaloff>:/LANChat/image/textunder.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="textColor">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/textcolor.png</normaloff>:/LANChat/image/textcolor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="sendFile">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/fileopen.png</normaloff>:/LANChat/image/fileopen.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="save">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/Floppy.png</normaloff>:/LANChat/image/Floppy.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="clear">
+          <property name="toolTip">
+           <string>清空聊天记录</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="lanchat.qrc">
+            <normaloff>:/LANChat/image/Bin (empty).png</normaloff>:/LANChat/image/Bin (empty).png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="send">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>发送(&amp;S)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="onlineUser">
+          <property name="text">
+           <string>在线用户：0人</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <widget class="QListWidget" name="listWidgetUser">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="lanchat.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>send</sender>
+   <signal>clicked()</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onSend_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>463</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1055</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendFile</sender>
+   <signal>clicked()</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onSendfile_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>943</x>
+     <y>505</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fontsizecomboBox</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onFontsizecomboBox_currentIndexChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>497</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fontComboBox</sender>
+   <signal>currentFontChanged(QFont)</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onFontComboBox_currentFontChanged(QFont)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>746</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textbold</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onTextbold_clicked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>901</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textitalic</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onTextitalic_clicked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>798</x>
+     <y>464</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textColor</sender>
+   <signal>clicked()</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onTextcolor_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1034</x>
+     <y>456</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>save</sender>
+   <signal>clicked()</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onSave_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>445</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1055</x>
+     <y>465</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clear</sender>
+   <signal>clicked()</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onClear_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>479</x>
+     <y>262</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1033</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textUnderline</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>LANChatClass</receiver>
+   <slot>onTextUnderline_clicked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>964</x>
+     <y>570</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onSend_clicked()</slot>
+  <slot>onClose_clicked()</slot>
+  <slot>onSendfile_clicked()</slot>
+  <slot>onFontsizecomboBox_currentIndexChanged(QString)</slot>
+  <slot>onFontComboBox_currentFontChanged(QFont)</slot>
+  <slot>onTextbold_clicked(bool)</slot>
+  <slot>onTextitalic_clicked(bool)</slot>
+  <slot>onTextcolor_clicked()</slot>
+  <slot>onSave_clicked()</slot>
+  <slot>onClear_clicked()</slot>
+  <slot>onTextUnderline_clicked(bool)</slot>
+ </slots>
+</ui>
