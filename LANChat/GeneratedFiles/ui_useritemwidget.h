@@ -51,7 +51,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_HeadImage->sizePolicy().hasHeightForWidth());
         label_HeadImage->setSizePolicy(sizePolicy);
-        label_HeadImage->setMaximumSize(QSize(81, 81));
+        label_HeadImage->setMaximumSize(QSize(45, 45));
 
         horizontalLayout->addWidget(label_HeadImage);
 

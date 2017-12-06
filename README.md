@@ -7,7 +7,7 @@ LAN Chat for windows.
 
 Screenshots
 -------------
-<img src="screenshots/及时雨_1.png" height="400" alt="Screenshot"/> <img src="screenshots/及时雨_2.png" height="400" alt="Screenshot"/> <img src="screenshots/及时雨_3.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/screenshot.jpg" height="858" alt="Screenshot"/>
 
 Getting Started
 ---------------

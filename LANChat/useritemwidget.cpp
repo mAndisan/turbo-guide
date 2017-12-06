@@ -14,6 +14,7 @@ userItemWidget::~userItemWidget()
 void userItemWidget::setUserHeadImage( QString strImageName )
 {
 	ui.label_HeadImage->setPixmap(QPixmap(strImageName));
+	ui.label_HeadImage->setScaledContents(true);
 }
 
 void userItemWidget::setUserName( QString strName )

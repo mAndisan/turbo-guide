@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QScrollBar>
+#include "xmlUtils.h"
 
 LANChat::LANChat(QWidget *parent)
 	: QMainWindow(parent)
@@ -20,15 +21,37 @@ LANChat::LANChat(QWidget *parent)
 
 LANChat::~LANChat()
 {
-
+	delete m_pSetAction;
+	delete m_pQuitAction;
+	delete m_pRestoreWinAction;
+	delete m_pSettingWidget;
 }
 
 void LANChat::initData()
 {
+	m_pSettingWidget = NULL;
+
 	CreateTrayIcon();
 
-	QString localHostName = QHostInfo::localHostName();
-	ui.labelName->setText(localHostName);
+	m_strLocalHostName = QHostInfo::localHostName();
+	m_strIP = getIP();
+	m_strUserName = getUserName();
+
+	//local user info
+	QFile file("profile.xml");
+	xmlUtils objXMLUtils;
+	if(!file.exists())
+	{
+		objXMLUtils.create_xml_DOM("profile.xml");
+	}
+	//objXMLUtils.add_xmlnode_DOM("profile.xml", m_strLocalHostName, m_strUserName, m_strIP);
+	//objXMLUtils.update_username_xml_DOM("profile.xml", "123456");
+	QString strUserName = objXMLUtils.read_username_xml_DOM("profile.xml");
+	qDebug() << "user name" << strUserName;
+	if(strUserName.length() > 0)
+		m_strUserName = strUserName;
+
+	ui.labelName->setText(m_strLocalHostName);
 
 	ui.textEdit->setFocusPolicy(Qt::StrongFocus);
 	ui.textBrowser->setFocusPolicy(Qt::NoFocus);
@@ -37,7 +60,7 @@ void LANChat::initData()
 	ui.textEdit->installEventFilter(this);
 
 	m_pUdpSocket = new QUdpSocket(this);
-	m_port = 45454;
+	m_port = 7755;
 	m_pUdpSocket->bind(m_port, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
 	connect(m_pUdpSocket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
 	sendMessage(NewParticipant);
@@ -57,32 +80,33 @@ void LANChat::sendMessage( MessageType type, QString serverAddress/*=""*/ )
 {
 	QByteArray data;
 	QDataStream out(&data, QIODevice::WriteOnly);
-	QString localHostName = QHostInfo::localHostName();
-	QString address = getIP();
-	QString strUserName = getUserName();
-	if(strUserName == "pac")
-		strUserName = QStringLiteral("徐旋");
 
-	out << type << strUserName << localHostName;
-
+	out << type << m_strUserName << m_strLocalHostName;
 	switch(type)
 	{
 	case ParticipantLeft:
-		out << address;
-		//m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
+		out << m_strIP;
+		m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
 		break;
 	case NewParticipant:
-		out << address;
-		//m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
+		out << m_strIP;
+		m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
 		break;
 	case Message :
 		if(ui.textEdit->toPlainText().length() > 0)
 		{
-			out << address << getMessage();
+			QString strMsg = getMessage();
+			out << m_strIP << strMsg;
 			ui.textBrowser->verticalScrollBar()->setValue(ui.textBrowser->verticalScrollBar()->maximum());
 
-			//qDebug() << "Destination IP address " << m_destHostAddress.toString();
-			//m_pUdpSocket->writeDatagram(data, data.length(), m_destHostAddress, m_port);
+			qDebug() << "Destination IP address " << m_destHostAddress.toString();
+			m_pUdpSocket->writeDatagram(data, data.length(), m_destHostAddress, m_port);
+
+			QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+			ui.textBrowser->setTextColor(Qt::black);
+			ui.textBrowser->setCurrentFont(QFont("Times New Roman",12));
+			ui.textBrowser->append("[ " + m_strUserName +" ] "+ time);
+			ui.textBrowser->append(strMsg);
 		}
 		break;
 	case FileName:
@@ -101,7 +125,7 @@ void LANChat::sendMessage( MessageType type, QString serverAddress/*=""*/ )
 		}
 	}
 
-	m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
+	//m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, m_port);
 }
 
 QString LANChat::getUserName()
@@ -146,7 +170,7 @@ QString LANChat::getIP()
 
 void LANChat::processPendingDatagrams()
 {
-	if(m_pUdpSocket->hasPendingDatagrams())
+	while(m_pUdpSocket->hasPendingDatagrams())
 	{
 		QByteArray datagram;
 		datagram.resize(m_pUdpSocket->pendingDatagramSize());
@@ -155,7 +179,7 @@ void LANChat::processPendingDatagrams()
 		int messageType;
 		in >> messageType;
 		QString userName,localHostName,ipAddress,message;
-		QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+		QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
 		switch(messageType)
 		{
 		case Message:
@@ -390,8 +414,7 @@ void LANChat::changeEvent( QEvent *e )
 
 void LANChat::participantLeft(QString strIP, QString userName,QString localHostName,QString time )
 {
-	QString address = getIP();
-	if(address != strIP)
+	if(m_strIP != strIP)
 	{
 		for(int i = 0; i < ui.listWidgetUser->count(); i++)
 		{
@@ -418,19 +441,27 @@ void LANChat::participantLeft(QString strIP, QString userName,QString localHostN
 void LANChat::closeEvent( QCloseEvent *event )
 {
 	sendMessage(ParticipantLeft);
-	/*if(m_pTrayIcon->isVisible())
-	{
-//		m_pTrayIcon->showMessage("LANChat", "LANChat Beta1.0", QSystemTrayIcon::Information, 10000);
-		hide();
-		event->ignore();
-	}
-	else*/
-	{
-		event->accept();
-	}
 
 	m_SqlUtils.deleteTable(strUserTable);
 	m_SqlUtils.dataBaseClose();
+
+	if(1 == m_quitType)
+	{
+		m_quitType = 0;
+		event->accept();
+	}
+	else
+	{
+		if(this->isVisible())
+		{
+			hide();
+			event->ignore();
+		}
+		else
+		{
+			event->accept();
+		}
+	}
 }
 
 void LANChat::hasPendingFile( QString userName,QString serverAddress, QString clientAddress,QString fileName )
@@ -463,22 +494,25 @@ void LANChat::hasPendingFile( QString userName,QString serverAddress, QString cl
 
 void LANChat::CreateTrayMenu()
 {
-	m_pMiniSizeAction = new QAction(QStringLiteral("最小化(&N)"), this);
-	m_pMaxSizeAction = new QAction(QStringLiteral("最大化(&X)"), this);
-	m_pRestoreWinAction = new QAction(QStringLiteral("还原(&R)"), this);
+//	m_pMiniSizeAction = new QAction(QStringLiteral("最小化(&N)"), this);
+//	m_pMaxSizeAction = new QAction(QStringLiteral("最大化(&X)"), this);
+	m_pRestoreWinAction = new QAction(QStringLiteral("打开面板(&R)"), this);
 	m_pQuitAction = new QAction(QStringLiteral("退出(&Q)"), this);
+	m_pSetAction = new QAction(QStringLiteral("设置"), this);
 
 	m_pMenu = new QMenu((QWidget *)QApplication::desktop());
-	m_pMenu->addAction(m_pMiniSizeAction);
-	m_pMenu->addAction(m_pMaxSizeAction);
+//	m_pMenu->addAction(m_pMiniSizeAction);
+//	m_pMenu->addAction(m_pMaxSizeAction);
+	m_pMenu->addAction(m_pSetAction);
 	m_pMenu->addAction(m_pRestoreWinAction);
 	m_pMenu->addSeparator();
 	m_pMenu->addAction(m_pQuitAction);
 
-	connect(m_pMiniSizeAction, SIGNAL(triggered()), this, SLOT(hide()));
-	connect(m_pMaxSizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
+//	connect(m_pMiniSizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+//	connect(m_pMaxSizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
 	connect(m_pRestoreWinAction, SIGNAL(triggered()), this, SLOT(showNormal()));
-	connect(m_pQuitAction, SIGNAL(triggered()), this, SLOT(quit()));
+	connect(m_pQuitAction, SIGNAL(triggered()), this, SLOT(onIconQuit_clicked()));
+	connect(m_pSetAction, SIGNAL(triggered()), this, SLOT(onIconSetting_clicked()));
 }
 
 void LANChat::CreateTrayIcon()
@@ -490,15 +524,15 @@ void LANChat::CreateTrayIcon()
 
 	m_pTrayIcon = new QSystemTrayIcon(this);
 	m_pTrayIcon->setIcon(QIcon(":/LANChat/image/MSN-Messenger.png"));
-//	setWindowIcon(QIcon("MSN-Messenger.png"));
+	setWindowIcon(QIcon(":/LANChat/image/MSN-Messenger.png"));
 
 	m_pTrayIcon->setToolTip("LANChat V1.0");
-	m_pTrayIcon->showMessage("LANChat", "LANChat Beta1.0", QSystemTrayIcon::Information, 10000);
+//	m_pTrayIcon->showMessage("LANChat", "LANChat Beta1.0", QSystemTrayIcon::Information, 10000);
 
 	m_pTrayIcon->setContextMenu(m_pMenu);
 	m_pTrayIcon->show();
 
-	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+	this->connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 }
 
 void LANChat::iconActivated( QSystemTrayIcon::ActivationReason reason )
@@ -529,6 +563,26 @@ void LANChat::onListItemUserClicked( QListWidgetItem *pItem )
 	ui.labelName->setText(strTextLabel);
 
 	QString strIP = pTemp->userIP();
-	//m_pDestHostAddress->setAddress(strIP);
 	m_destHostAddress.setAddress(strIP);
+}
+
+void LANChat::onIconQuit_clicked()
+{
+	m_quitType = 1;
+	close();
+
+	if(m_pSettingWidget != NULL)
+		m_pSettingWidget->close();
+}
+
+void LANChat::onIconSetting_clicked()
+{
+	qDebug() << "setting show";
+	if(!this->isVisible())
+		showNormal();
+
+	if(m_pSettingWidget == NULL)
+		m_pSettingWidget = new settingWidget;
+	
+	m_pSettingWidget->show();
 }

@@ -11,6 +11,7 @@
 #include "tcpserver.h"
 #include "useritemwidget.h"
 #include "sqlutils.h"
+#include "settingwidget.h"
 
 enum MessageType{Message, NewParticipant, ParticipantLeft, FileName, Refuse};
 
@@ -32,6 +33,11 @@ public:
 	QAction *m_pMaxSizeAction;
 	QAction *m_pRestoreWinAction;
 	QAction *m_pQuitAction;
+	QAction *m_pSetAction;
+
+	QString m_strLocalHostName;
+	QString m_strUserName;
+	QString m_strIP;
 
 	QString getMessage();
 
@@ -61,6 +67,9 @@ private:
 
 	sqlUtils m_SqlUtils;
 	QHostAddress m_destHostAddress;
+	int m_quitType;		// 1 - via trayIcon
+
+	settingWidget *m_pSettingWidget;
 
 	bool saveFile(const QString& fileName);//±£´æÁÄÌì¼ÇÂ¼
 private slots:
@@ -78,6 +87,8 @@ private slots:
 	void onFontsizecomboBox_currentIndexChanged(QString );
 	void onSendfile_clicked();
 	void onSend_clicked();
+	void onIconQuit_clicked();
+	void onIconSetting_clicked();
 
 	void onListItemUserClicked(QListWidgetItem *pItem);
 public:
