@@ -7,7 +7,7 @@ LAN Chat for windows.
 
 Screenshots
 -------------
-<img src="screenshots/screenshot.jpg" height="858" alt="Screenshot"/>
+<img src="screenshots/screenshot.jpg" height="400" alt="Screenshot"/>
 
 Getting Started
 ---------------
