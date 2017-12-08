@@ -31,6 +31,7 @@ private:
 
 	QString m_strUserName;
 private:
+	void closeEvent(QCloseEvent *event);
 	void initView();
 	void initData();
 

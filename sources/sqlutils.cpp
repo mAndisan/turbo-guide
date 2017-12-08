@@ -14,8 +14,8 @@ void sqlUtils::dataBaseInit()
 {
 	m_dataBase = QSqlDatabase::addDatabase("QSQLITE");
 	m_dataBase.setDatabaseName("chatConfig.db");
-//	m_dataBase.setUserName("xuxuan");
-//	m_dataBase.setPassword("AI4teru");
+	m_dataBase.setUserName("xuxuan");
+	m_dataBase.setPassword("AI4teru");
 }
 
 void sqlUtils::dataBaseOpen()
@@ -45,6 +45,21 @@ void sqlUtils::createUserItemTable()
 	}
 }
 
+void sqlUtils::createMsgTable()
+{
+	QSqlQuery sqlQuery;
+	QString create_sql = "create table msgTable (id INTEGER PRIMARY KEY AUTOINCREMENT, \
+						 FromUserIP varchar(30) NOT NULL, \
+						 ToUserIP varchar(30), \
+						 MessageTime varchar(30), \
+						 Message varchar(2048))";
+	sqlQuery.prepare(create_sql);
+	if(!sqlQuery.exec())
+	{
+		qDebug() << "Fail to create message table." << sqlQuery.lastError();
+	}
+}
+
 void sqlUtils::insertUserItem( QString strUserName, QString strIP, QString strLocalHostName )
 {
 	QSqlQuery sqlQuery;
@@ -53,6 +68,21 @@ void sqlUtils::insertUserItem( QString strUserName, QString strIP, QString strLo
 	sqlQuery.addBindValue(strUserName);
 	sqlQuery.addBindValue(strIP);
 	sqlQuery.addBindValue(strLocalHostName);
+	if(!sqlQuery.exec())
+	{
+		qDebug() << "Fail to insert userItem." << sqlQuery.lastError();
+	}
+}
+
+void sqlUtils::insertMsgItem( QString strFromIP, QString strToIP, QString strTime, QString strMsg )
+{
+	QSqlQuery sqlQuery;
+	QString insert_sql = "insert into msgTable(FromUserIP, ToUserIP, MessageTime, Message) values (?, ?, ?, ?)";
+	sqlQuery.prepare(insert_sql);
+	sqlQuery.addBindValue(strFromIP);
+	sqlQuery.addBindValue(strToIP);
+	sqlQuery.addBindValue(strTime);
+	sqlQuery.addBindValue(strMsg);
 	if(!sqlQuery.exec())
 	{
 		qDebug() << "Fail to insert userItem." << sqlQuery.lastError();

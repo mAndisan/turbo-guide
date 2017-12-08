@@ -1,9 +1,12 @@
 #pragma once
+//#include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QDomDocument>
+
+const QString gstrXMLName = "profile.xml";
 
 class xmlUtils
 {

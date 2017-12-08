@@ -61,15 +61,16 @@ private:
 
 	QUdpSocket *m_pUdpSocket;
 	qint16 m_port;
-	QString m_strFileName;
 	TcpServer *m_pServer;
 	QColor m_color;
 
 	sqlUtils m_SqlUtils;
 	QHostAddress m_destHostAddress;
-	int m_quitType;		// 1 - via trayIcon
-
 	settingWidget *m_pSettingWidget;
+
+	int m_quitType;			// 1 - via trayIcon
+	QString m_strFileName;
+	QString m_strCurIP;		//current selected ip address
 
 	bool saveFile(const QString& fileName);//±£´æÁÄÌì¼ÇÂ¼
 private slots:
@@ -83,8 +84,8 @@ private slots:
 	void onTextcolor_clicked();
 	void onTextitalic_clicked(bool checked);
 	void onTextbold_clicked(bool checked);
-	void onFontComboBox_currentFontChanged(QFont f);
-	void onFontsizecomboBox_currentIndexChanged(QString );
+//	void onFontComboBox_currentFontChanged(QFont f);
+//	void onFontsizecomboBox_currentIndexChanged(QString );
 	void onSendfile_clicked();
 	void onSend_clicked();
 	void onIconQuit_clicked();

@@ -40,19 +40,21 @@ void LANChat::initData()
 	//local user info
 	QFile file("profile.xml");
 	xmlUtils objXMLUtils;
-	if(!file.exists())
+	if(file.exists())
 	{
-		objXMLUtils.create_xml_DOM("profile.xml");
+		//objXMLUtils.update_username_xml_DOM("profile.xml", "123456");
+		QString strUserName = objXMLUtils.read_username_xml_DOM(gstrXMLName);
+		qDebug() << "user name" << strUserName;
+		if(strUserName.length() > 0)
+			m_strUserName = strUserName;
 	}
-	//objXMLUtils.add_xmlnode_DOM("profile.xml", m_strLocalHostName, m_strUserName, m_strIP);
-	//objXMLUtils.update_username_xml_DOM("profile.xml", "123456");
-	QString strUserName = objXMLUtils.read_username_xml_DOM("profile.xml");
-	qDebug() << "user name" << strUserName;
-	if(strUserName.length() > 0)
-		m_strUserName = strUserName;
+	else
+	{
+		objXMLUtils.create_xml_DOM(gstrXMLName);
+		objXMLUtils.add_xmlnode_DOM(gstrXMLName, m_strLocalHostName, m_strUserName, m_strIP);
+	}
 
-	ui.labelName->setText(m_strLocalHostName);
-
+	ui.labelName->setText(m_strUserName);
 	ui.textEdit->setFocusPolicy(Qt::StrongFocus);
 	ui.textBrowser->setFocusPolicy(Qt::NoFocus);
 
@@ -74,6 +76,7 @@ void LANChat::initData()
 	m_SqlUtils.dataBaseInit();
 	m_SqlUtils.dataBaseOpen();
 	m_SqlUtils.createUserItemTable();
+	m_SqlUtils.createMsgTable();
 }
 
 void LANChat::sendMessage( MessageType type, QString serverAddress/*=""*/ )
@@ -189,6 +192,8 @@ void LANChat::processPendingDatagrams()
 				ui.textBrowser->setCurrentFont(QFont("Times New Roman",12));
 				ui.textBrowser->append("[ " +userName+" ] "+ time);
 				ui.textBrowser->append(message);
+
+				m_SqlUtils.insertMsgItem(ipAddress, m_strIP, time, message);
 				break;
 			}
 		case NewParticipant:
@@ -260,12 +265,13 @@ void LANChat::sentFileName( QString fileName)
 
 void LANChat::currentFormatChanged( const QTextCharFormat &format )
 {
-	ui.fontComboBox->setCurrentFont(format.font());
+/*	ui.fontComboBox->setCurrentFont(format.font());
 
 	if(format.fontPointSize()<9)  //如果字体大小出错，因为我们最小的字体为9
 		ui.fontsizecomboBox->setCurrentIndex(3); //即显示12
 	else ui.fontsizecomboBox->setCurrentIndex(
 		ui.fontsizecomboBox->findText(QString::number(format.fontPointSize())));
+		*/
 
 	ui.textbold->setChecked(format.font().bold());
 	ui.textitalic->setChecked(format.font().italic());
@@ -312,7 +318,7 @@ void LANChat::onSendfile_clicked()
 	m_pServer->show();
 	m_pServer->initServer();
 }
-
+/*
 void LANChat::onFontsizecomboBox_currentIndexChanged( QString size)
 {
 	ui.textEdit->setFontPointSize(size.toDouble());
@@ -324,6 +330,7 @@ void LANChat::onFontComboBox_currentFontChanged( QFont f )
 	ui.textEdit->setCurrentFont(f);
 	ui.textEdit->setFocus();
 }
+*/
 
 void LANChat::onTextbold_clicked( bool checked )
 {
@@ -562,8 +569,8 @@ void LANChat::onListItemUserClicked( QListWidgetItem *pItem )
 	QString strTextLabel = pTemp->userName();
 	ui.labelName->setText(strTextLabel);
 
-	QString strIP = pTemp->userIP();
-	m_destHostAddress.setAddress(strIP);
+	m_strCurIP = pTemp->userIP();
+	m_destHostAddress.setAddress(m_strCurIP);
 }
 
 void LANChat::onIconQuit_clicked()

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_LANChat_t {
-    QByteArrayData data[24];
-    char stringdata[409];
+    QByteArrayData data[21];
+    char stringdata[334];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,28 +43,23 @@ QT_MOC_LITERAL(10, 138, 14),
 QT_MOC_LITERAL(11, 153, 19),
 QT_MOC_LITERAL(12, 173, 20),
 QT_MOC_LITERAL(13, 194, 18),
-QT_MOC_LITERAL(14, 213, 33),
-QT_MOC_LITERAL(15, 247, 1),
-QT_MOC_LITERAL(16, 249, 38),
-QT_MOC_LITERAL(17, 288, 18),
-QT_MOC_LITERAL(18, 307, 14),
-QT_MOC_LITERAL(19, 322, 18),
-QT_MOC_LITERAL(20, 341, 21),
-QT_MOC_LITERAL(21, 363, 21),
-QT_MOC_LITERAL(22, 385, 16),
-QT_MOC_LITERAL(23, 402, 5)
+QT_MOC_LITERAL(14, 213, 18),
+QT_MOC_LITERAL(15, 232, 14),
+QT_MOC_LITERAL(16, 247, 18),
+QT_MOC_LITERAL(17, 266, 21),
+QT_MOC_LITERAL(18, 288, 21),
+QT_MOC_LITERAL(19, 310, 16),
+QT_MOC_LITERAL(20, 327, 5)
     },
     "LANChat\0processPendingDatagrams\0\0"
     "sentFileName\0currentFormatChanged\0"
     "QTextCharFormat\0format\0onTextUnderline_clicked\0"
     "checked\0onClear_clicked\0onSave_clicked\0"
     "onTextcolor_clicked\0onTextitalic_clicked\0"
-    "onTextbold_clicked\0onFontComboBox_currentFontChanged\0"
-    "f\0onFontsizecomboBox_currentIndexChanged\0"
-    "onSendfile_clicked\0onSend_clicked\0"
-    "onIconQuit_clicked\0onIconSetting_clicked\0"
-    "onListItemUserClicked\0QListWidgetItem*\0"
-    "pItem\0"
+    "onTextbold_clicked\0onSendfile_clicked\0"
+    "onSend_clicked\0onIconQuit_clicked\0"
+    "onIconSetting_clicked\0onListItemUserClicked\0"
+    "QListWidgetItem*\0pItem\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +69,7 @@ static const uint qt_meta_data_LANChat[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,22 +77,20 @@ static const uint qt_meta_data_LANChat[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   94,    2, 0x08,
-       3,    1,   95,    2, 0x08,
-       4,    1,   98,    2, 0x08,
-       7,    1,  101,    2, 0x08,
-       9,    0,  104,    2, 0x08,
-      10,    0,  105,    2, 0x08,
-      11,    0,  106,    2, 0x08,
-      12,    1,  107,    2, 0x08,
-      13,    1,  110,    2, 0x08,
-      14,    1,  113,    2, 0x08,
-      16,    1,  116,    2, 0x08,
-      17,    0,  119,    2, 0x08,
-      18,    0,  120,    2, 0x08,
-      19,    0,  121,    2, 0x08,
-      20,    0,  122,    2, 0x08,
-      21,    1,  123,    2, 0x08,
+       1,    0,   84,    2, 0x08,
+       3,    1,   85,    2, 0x08,
+       4,    1,   88,    2, 0x08,
+       7,    1,   91,    2, 0x08,
+       9,    0,   94,    2, 0x08,
+      10,    0,   95,    2, 0x08,
+      11,    0,   96,    2, 0x08,
+      12,    1,   97,    2, 0x08,
+      13,    1,  100,    2, 0x08,
+      14,    0,  103,    2, 0x08,
+      15,    0,  104,    2, 0x08,
+      16,    0,  105,    2, 0x08,
+      17,    0,  106,    2, 0x08,
+      18,    1,  107,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void,
@@ -109,13 +102,11 @@ static const uint qt_meta_data_LANChat[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Bool,    8,
     QMetaType::Void, QMetaType::Bool,    8,
-    QMetaType::Void, QMetaType::QFont,   15,
-    QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 22,   23,
+    QMetaType::Void, 0x80000000 | 19,   20,
 
        0        // eod
 };
@@ -134,13 +125,11 @@ void LANChat::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 6: _t->onTextcolor_clicked(); break;
         case 7: _t->onTextitalic_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 8: _t->onTextbold_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 9: _t->onFontComboBox_currentFontChanged((*reinterpret_cast< QFont(*)>(_a[1]))); break;
-        case 10: _t->onFontsizecomboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 11: _t->onSendfile_clicked(); break;
-        case 12: _t->onSend_clicked(); break;
-        case 13: _t->onIconQuit_clicked(); break;
-        case 14: _t->onIconSetting_clicked(); break;
-        case 15: _t->onListItemUserClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 9: _t->onSendfile_clicked(); break;
+        case 10: _t->onSend_clicked(); break;
+        case 11: _t->onIconQuit_clicked(); break;
+        case 12: _t->onIconSetting_clicked(); break;
+        case 13: _t->onListItemUserClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -171,13 +160,13 @@ int LANChat::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 14;
     }
     return _id;
 }

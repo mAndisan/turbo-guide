@@ -26,7 +26,14 @@ public:
     {
         if (settingWidget->objectName().isEmpty())
             settingWidget->setObjectName(QStringLiteral("settingWidget"));
-        settingWidget->resize(400, 300);
+        settingWidget->resize(500, 300);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(settingWidget->sizePolicy().hasHeightForWidth());
+        settingWidget->setSizePolicy(sizePolicy);
+        settingWidget->setMinimumSize(QSize(500, 300));
+        settingWidget->setMaximumSize(QSize(500, 300));
 
         retranslateUi(settingWidget);
 

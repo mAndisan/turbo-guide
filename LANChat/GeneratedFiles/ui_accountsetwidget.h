@@ -34,10 +34,11 @@ public:
         accountSetWidget->setMinimumSize(QSize(0, 0));
         labelUserName = new QLabel(accountSetWidget);
         labelUserName->setObjectName(QStringLiteral("labelUserName"));
-        labelUserName->setGeometry(QRect(60, 50, 51, 21));
+        labelUserName->setGeometry(QRect(30, 20, 51, 31));
         lineEdit_UserName = new QLineEdit(accountSetWidget);
         lineEdit_UserName->setObjectName(QStringLiteral("lineEdit_UserName"));
-        lineEdit_UserName->setGeometry(QRect(120, 50, 141, 20));
+        lineEdit_UserName->setGeometry(QRect(90, 20, 141, 30));
+        lineEdit_UserName->setMinimumSize(QSize(0, 30));
 
         retranslateUi(accountSetWidget);
 
@@ -47,7 +48,7 @@ public:
     void retranslateUi(QWidget *accountSetWidget)
     {
         accountSetWidget->setWindowTitle(QApplication::translate("accountSetWidget", "accountSetWidget", 0));
-        labelUserName->setText(QApplication::translate("accountSetWidget", "\347\224\250\346\210\267\345\220\215\357\274\232", 0));
+        labelUserName->setText(QApplication::translate("accountSetWidget", "\347\224\250\346\210\267\345\220\215", 0));
     } // retranslateUi
 
 };

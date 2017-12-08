@@ -13,8 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QComboBox>
-#include <QtWidgets/QFontComboBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -38,10 +37,9 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QVBoxLayout *verticalLayout;
     QLabel *labelName;
+    QFrame *line;
     QTextBrowser *textBrowser;
     QHBoxLayout *horizontalLayout_4;
-    QFontComboBox *fontComboBox;
-    QComboBox *fontsizecomboBox;
     QToolButton *textbold;
     QToolButton *textitalic;
     QToolButton *textUnderline;
@@ -49,6 +47,7 @@ public:
     QToolButton *sendFile;
     QToolButton *save;
     QToolButton *clear;
+    QSpacerItem *horizontalSpacer_2;
     QTextEdit *textEdit;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer;
@@ -63,17 +62,40 @@ public:
         if (LANChatClass->objectName().isEmpty())
             LANChatClass->setObjectName(QStringLiteral("LANChatClass"));
         LANChatClass->resize(748, 510);
+        QPalette palette;
+        QBrush brush(QColor(255, 255, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        QBrush brush1(QColor(240, 240, 240, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        LANChatClass->setPalette(palette);
         QIcon icon;
         icon.addFile(QStringLiteral(":/LANChat/image/MSN-Messenger.png"), QSize(), QIcon::Normal, QIcon::Off);
         LANChatClass->setWindowIcon(icon);
         centralWidget = new QWidget(LANChatClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        QPalette palette1;
+        QBrush brush2(QColor(245, 245, 245, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::Shadow, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Shadow, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::Shadow, brush2);
+        centralWidget->setPalette(palette1);
         horizontalLayout_3 = new QHBoxLayout(centralWidget);
-        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setSpacing(0);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(1, 0, 0, 1);
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         labelName = new QLabel(centralWidget);
         labelName->setObjectName(QStringLiteral("labelName"));
@@ -83,6 +105,13 @@ public:
 
         verticalLayout->addWidget(labelName);
 
+        line = new QFrame(centralWidget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line);
+
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -90,36 +119,20 @@ public:
         sizePolicy.setVerticalStretch(2);
         sizePolicy.setHeightForWidth(textBrowser->sizePolicy().hasHeightForWidth());
         textBrowser->setSizePolicy(sizePolicy);
+        textBrowser->setMinimumSize(QSize(550, 0));
         textBrowser->setMaximumSize(QSize(16777215, 16777215));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        textBrowser->setPalette(palette2);
+        textBrowser->setFrameShape(QFrame::NoFrame);
 
         verticalLayout->addWidget(textBrowser);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        fontComboBox = new QFontComboBox(centralWidget);
-        fontComboBox->setObjectName(QStringLiteral("fontComboBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(fontComboBox->sizePolicy().hasHeightForWidth());
-        fontComboBox->setSizePolicy(sizePolicy1);
-        fontComboBox->setMinimumSize(QSize(1, 25));
-
-        horizontalLayout_4->addWidget(fontComboBox);
-
-        fontsizecomboBox = new QComboBox(centralWidget);
-        fontsizecomboBox->setObjectName(QStringLiteral("fontsizecomboBox"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Maximum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(fontsizecomboBox->sizePolicy().hasHeightForWidth());
-        fontsizecomboBox->setSizePolicy(sizePolicy2);
-        fontsizecomboBox->setMinimumSize(QSize(0, 25));
-        fontsizecomboBox->setEditable(true);
-
-        horizontalLayout_4->addWidget(fontsizecomboBox);
-
         textbold = new QToolButton(centralWidget);
         textbold->setObjectName(QStringLiteral("textbold"));
         QIcon icon1;
@@ -197,12 +210,22 @@ public:
 
         horizontalLayout_4->addWidget(clear);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_2);
+
 
         verticalLayout->addLayout(horizontalLayout_4);
 
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
         textEdit->setMaximumSize(QSize(16777215, 16777215));
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        textEdit->setPalette(palette3);
+        textEdit->setFrameShape(QFrame::NoFrame);
 
         verticalLayout->addWidget(textEdit);
 
@@ -226,7 +249,7 @@ public:
         horizontalLayout_3->addLayout(verticalLayout);
 
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setSpacing(6);
+        gridLayout_2->setSpacing(0);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -241,10 +264,24 @@ public:
 
         listWidgetUser = new QListWidget(centralWidget);
         listWidgetUser->setObjectName(QStringLiteral("listWidgetUser"));
+        listWidgetUser->setMaximumSize(QSize(300, 16777215));
+        QPalette palette4;
+        QBrush brush3(QColor(227, 227, 227, 255));
+        brush3.setStyle(Qt::SolidPattern);
+        palette4.setBrush(QPalette::Active, QPalette::Light, brush3);
+        QBrush brush4(QColor(238, 234, 232, 255));
+        brush4.setStyle(Qt::SolidPattern);
+        palette4.setBrush(QPalette::Active, QPalette::Base, brush4);
+        palette4.setBrush(QPalette::Inactive, QPalette::Light, brush3);
+        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush4);
+        palette4.setBrush(QPalette::Disabled, QPalette::Light, brush3);
+        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        listWidgetUser->setPalette(palette4);
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
         font1.setPointSize(20);
         listWidgetUser->setFont(font1);
+        listWidgetUser->setFrameShape(QFrame::NoFrame);
         listWidgetUser->setIconSize(QSize(30, 30));
 
         gridLayout_2->addWidget(listWidgetUser, 0, 0, 1, 1);
@@ -257,8 +294,6 @@ public:
         retranslateUi(LANChatClass);
         QObject::connect(send, SIGNAL(clicked()), LANChatClass, SLOT(onSend_clicked()));
         QObject::connect(sendFile, SIGNAL(clicked()), LANChatClass, SLOT(onSendfile_clicked()));
-        QObject::connect(fontsizecomboBox, SIGNAL(currentIndexChanged(QString)), LANChatClass, SLOT(onFontsizecomboBox_currentIndexChanged(QString)));
-        QObject::connect(fontComboBox, SIGNAL(currentFontChanged(QFont)), LANChatClass, SLOT(onFontComboBox_currentFontChanged(QFont)));
         QObject::connect(textbold, SIGNAL(clicked(bool)), LANChatClass, SLOT(onTextbold_clicked(bool)));
         QObject::connect(textitalic, SIGNAL(clicked(bool)), LANChatClass, SLOT(onTextitalic_clicked(bool)));
         QObject::connect(textColor, SIGNAL(clicked()), LANChatClass, SLOT(onTextcolor_clicked()));
@@ -273,24 +308,6 @@ public:
     {
         LANChatClass->setWindowTitle(QApplication::translate("LANChatClass", "\345\217\212\346\227\266\351\233\250", 0));
         labelName->setText(QString());
-        fontsizecomboBox->clear();
-        fontsizecomboBox->insertItems(0, QStringList()
-         << QApplication::translate("LANChatClass", "9", 0)
-         << QApplication::translate("LANChatClass", "10", 0)
-         << QApplication::translate("LANChatClass", "11", 0)
-         << QApplication::translate("LANChatClass", "12", 0)
-         << QApplication::translate("LANChatClass", "13", 0)
-         << QApplication::translate("LANChatClass", "14", 0)
-         << QApplication::translate("LANChatClass", "15", 0)
-         << QApplication::translate("LANChatClass", "16", 0)
-         << QApplication::translate("LANChatClass", "17", 0)
-         << QApplication::translate("LANChatClass", "18", 0)
-         << QApplication::translate("LANChatClass", "19", 0)
-         << QApplication::translate("LANChatClass", "20", 0)
-         << QApplication::translate("LANChatClass", "21", 0)
-         << QApplication::translate("LANChatClass", "22", 0)
-        );
-        fontsizecomboBox->setCurrentText(QApplication::translate("LANChatClass", "9", 0));
 #ifndef QT_NO_TOOLTIP
         textbold->setToolTip(QApplication::translate("LANChatClass", "\345\212\240\347\262\227", 0));
 #endif // QT_NO_TOOLTIP

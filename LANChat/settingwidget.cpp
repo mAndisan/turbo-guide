@@ -22,14 +22,21 @@ settingWidget::~settingWidget()
 
 void settingWidget::initView()
 {
+	setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
+	setStyleSheet("background-color:lightgray;");
+
 	m_pHLayout = new QHBoxLayout;
 	m_pListWidget = new QListWidget;
 	m_pAccountSetWidget = new accountSetWidget;
 	m_pNormalSetWidget = new normalSetWidget;
 	m_pAboutSetWidget = new aboutSetWidget;
 
+	m_pHLayout->setMargin(0);
+	m_pListWidget->setStyleSheet("background-color:gray;");
+
 	m_pListWidget->setMaximumWidth(100);
 	m_pListWidget->setFrameShape(QListWidget::NoFrame);
+
 	//’À∫≈…Ë÷√
 	m_pItemAccount = new QListWidgetItem;
 	m_pItemAccount->setText(QStringLiteral("’À∫≈…Ë÷√"));
@@ -77,6 +84,9 @@ void settingWidget::initData()
 
 void settingWidget::onItemClicked( QListWidgetItem *pItem )
 {
+	if(m_pAccountSetWidget != NULL && m_pAccountSetWidget->isVisible())
+		m_pAccountSetWidget->setUserName("");
+
 	if(pItem->text() == QStringLiteral("’À∫≈…Ë÷√"))
 	{
 		qDebug() << "account item clicked";
@@ -98,4 +108,10 @@ void settingWidget::onItemClicked( QListWidgetItem *pItem )
 		m_pNormalSetWidget->hide();
 		m_pAboutSetWidget->show();
 	}
+}
+
+void settingWidget::closeEvent( QCloseEvent *event )
+{
+	if(m_pAccountSetWidget != NULL && m_pAccountSetWidget->isVisible())
+		m_pAccountSetWidget->setUserName("");
 }

@@ -21,7 +21,9 @@ public:
 	void dataBaseOpen();
 	void dataBaseClose();
 	void createUserItemTable();
+	void createMsgTable();
 	void insertUserItem(QString strUserName, QString strIP, QString strLocalHostName);
+	void insertMsgItem(QString strFromIP, QString strToIP, QString strTime, QString strMsg);
 	bool isUserItemExist(QString strIP);
 
 	void deleteTable(QString strTable);

@@ -4,6 +4,7 @@ aboutSetWidget::aboutSetWidget(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
+	//setStyleSheet("background-color:white;");
 
 	ui.label_gitLink->setOpenExternalLinks(true);
 	//ui.label_gitLink->setText("<a href = https://github.com/mAndisan/turbo-guide>https://github.com/mAndisan/turbo-guide</a>");
